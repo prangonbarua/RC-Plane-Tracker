@@ -106,9 +106,9 @@ RC-Plane-Tracker/
 
 ---
 
-## AI Context Prompt
+## Context Prompt
 
-Copy and paste this to continue working on this project in a new AI session:
+Copy and paste this to continue working on this project in a new session:
 
 ```
 I'm working on the RC Plane Flight Tracker project at /Users/prangonbarua/Documents/GitHub/RC-Plane-Tracker
