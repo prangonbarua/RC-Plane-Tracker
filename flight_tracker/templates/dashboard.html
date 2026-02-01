@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RC Plane Flight Tracker</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🛩️ RC Plane Flight Tracker</h1>
+            <div class="connection-status" id="connectionStatus">
+                <span class="status-dot disconnected"></span>
+                <span id="statusText">Disconnected</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Map Section -->
+            <div class="map-section">
+                <div id="map"></div>
+                <div class="map-overlay" id="flightStatus">
+                    <span class="flight-badge" id="flightBadge">STANDBY</span>
+                </div>
+            </div>
+
+            <!-- Data Panel -->
+            <div class="data-panel">
+                <!-- Live Data -->
+                <div class="data-card">
+                    <h3>📍 Live Position</h3>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <span class="label">Latitude</span>
+                            <span class="value" id="latitude">0.000000</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="label">Longitude</span>
+                            <span class="value" id="longitude">0.000000</span>
+                        </div>
+                        <div class="data-item">
+                            <span class="label">Satellites</span>
+                            <span class="value" id="satellites">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Speed & Altitude -->
+                <div class="data-card">
+                    <h3>📊 Flight Data</h3>
+                    <div class="big-numbers">
+                        <div class="big-number-item">
+                            <span class="big-value" id="speed">0.0</span>
+                            <span class="big-unit">MPH</span>
+                            <span class="peak-value">Peak: <span id="peakSpeed">0.0</span></span>
+                        </div>
+                        <div class="big-number-item">
+                            <span class="big-value" id="altitude">0.0</span>
+                            <span class="big-unit">M</span>
+                            <span class="peak-value">Peak: <span id="peakAltitude">0.0</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Signal Strength -->
+                <div class="data-card">
+                    <h3>📶 Signal</h3>
+                    <div class="signal-grid">
+                        <div class="signal-item">
+                            <span class="label">RSSI</span>
+                            <span class="value" id="rssi">0</span>
+                            <span class="unit">dBm</span>
+                        </div>
+                        <div class="signal-item">
+                            <span class="label">SNR</span>
+                            <span class="value" id="snr">0.0</span>
+                            <span class="unit">dB</span>
+                        </div>
+                    </div>
+                    <div class="signal-bar-container">
+                        <div class="signal-bar" id="signalBar"></div>
+                    </div>
+                </div>
+
+                <!-- Flight History -->
+                <div class="data-card">
+                    <h3>📋 Flight History</h3>
+                    <div class="flight-list" id="flightList">
+                        <p class="no-flights">No flights recorded yet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flight Details Modal -->
+    <div class="modal" id="flightModal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Flight Details</h2>
+            <div id="flightDetails"></div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="exportFlight()">📥 Export to Excel</button>
+                <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="/static/js/map.js"></script>
+</body>
+</html>
