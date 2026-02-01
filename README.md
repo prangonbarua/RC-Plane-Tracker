@@ -103,3 +103,29 @@ RC-Plane-Tracker/
     ├── templates/
     └── static/
 ```
+
+---
+
+## AI Context Prompt
+
+Copy and paste this to continue working on this project in a new AI session:
+
+```
+I'm working on the RC Plane Flight Tracker project at /Users/prangonbarua/Documents/GitHub/RC-Plane-Tracker
+
+This is a GPS tracking system for RC planes with:
+- ESP32-C3 on the plane with BN-220 GPS + SX1278 LoRa (433MHz)
+- Ground station: ESP32 + LoRa connected via USB to computer
+- Python Flask backend with real-time SocketIO updates
+- Web dashboard at localhost:5000 with OpenStreetMap tracking
+- Automatic flight detection (starts at >5mph for 5s, ends at <2mph for 30s)
+- SQLite logging + Excel export with bold peak values
+
+Key files:
+- plane_transmitter/plane_transmitter.ino (ESP32-C3 code)
+- ground_receiver/ground_receiver.ino (ground ESP32 code)
+- flight_tracker/server.py (Flask backend)
+- flight_tracker/templates/dashboard.html (web UI)
+
+GitHub: https://github.com/prangonbarua/RC-Plane-Tracker
+```
