@@ -15,8 +15,8 @@
 #include <HardwareSerial.h>
 
 // GPS Serial pins for ESP32-C3
-#define GPS_RX 20  // Connect to GPS TX (green wire)
-#define GPS_TX 21  // Connect to GPS RX (white wire) - optional
+#define GPS_RX 5   // Connect to GPS TX (green wire)
+#define GPS_TX 7   // Not used
 
 TinyGPSPlus gps;
 HardwareSerial gpsSerial(1);
