@@ -1,36 +1,35 @@
 /*
- * GPS Test for ESP32-C3
- * Tests BN-220 GPS module without LoRa
+ * GPS Test for ESP32-WROOM-32
+ * Tests BN-220 GPS module
  *
  * WIRING:
- * BN-220 GPS    ESP32-C3
- * ──────────    ────────
- * VCC (red)  -> 3.3V
- * GND (black)-> GND
- * TX (green) -> GPIO20
- * RX (white) -> GPIO21 (optional)
+ * BN-220 GPS      ESP32
+ * ──────────      ─────
+ * VCC (red)   ->  3.3V
+ * GND (black) ->  GND
+ * TX (green)  ->  GPIO16
+ * RX (white)  ->  GPIO17 (optional)
  */
 
-#include <TinyGPS++.h>
-#include <HardwareSerial.h>
+#include <TinyGPSPlus.h>
 
-// GPS Serial pins for ESP32-C3
-#define GPS_RX 5   // Connect to GPS TX (green wire)
-#define GPS_TX 7   // Not used
+// GPS Serial pins for ESP32-WROOM-32
+#define GPS_RX 16  // Connect to GPS TX (green wire)
+#define GPS_TX 17  // Connect to GPS RX (white wire)
 
 TinyGPSPlus gps;
-HardwareSerial gpsSerial(1);
+HardwareSerial gpsSerial(2);  // Use Serial2
 
 void setup() {
   Serial.begin(115200);
   delay(1000);
 
   Serial.println("=================================");
-  Serial.println("   GPS Test for ESP32-C3");
+  Serial.println("   GPS Test for ESP32-WROOM-32");
   Serial.println("=================================");
   Serial.println();
 
-  // Initialize GPS
+  // Initialize GPS at 9600 baud (BN-220 default)
   gpsSerial.begin(9600, SERIAL_8N1, GPS_RX, GPS_TX);
   Serial.println("GPS initialized at 9600 baud");
   Serial.println("Waiting for GPS signal...");
@@ -44,7 +43,7 @@ void loop() {
     char c = gpsSerial.read();
     gps.encode(c);
 
-    // Also print raw NMEA for debugging
+    // Print raw NMEA for debugging
     Serial.print(c);
   }
 
